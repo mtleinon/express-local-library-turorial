@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+const moment = require('moment');
 var Schema = mongoose.Schema;
 
 var AuthorSchema = new Schema(
@@ -10,6 +10,20 @@ var AuthorSchema = new Schema(
     date_of_death: {type: Date},
   }
 );
+
+// Virtual for formatting the date
+AuthorSchema
+.virtual('date_of_birth_formatted')
+.get(function () {
+  return this.date_of_birth ? moment(this.date_of_birth).format('YYYY-MM-DD') : '';
+});
+
+// Virtual for formatting the date
+AuthorSchema
+.virtual('date_of_death_formatted')
+.get(function () {
+  return this.date_of_death ? moment(this.date_of_death).format('YYYY-MM-DD') : '';
+});
 
 // Virtual for author's full name
 AuthorSchema

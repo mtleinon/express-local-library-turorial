@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passwords = require('./secrets/passwords');
 
 // Connect to Mongo DB in Atlas service print possible errors to console
-mongoDB = 'mongodb+srv://test:test@cluster0-ipmon.mongodb.net/local_library?retryWrites=true'
+mongoDB = `mongodb+srv://test:${passwords.test}@cluster0-ipmon.mongodb.net/local_library?retryWrites=true`;
 const mongoose = require('mongoose');
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
